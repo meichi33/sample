@@ -1,0 +1,260 @@
+@use 'variable' as v;
+@use "mixin" as m;
+
+body {
+  color: v.$main-color;
+  font-size: 16px;
+  font-family: "M PLUS 1", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  background-color: #F5EBDD;
+}
+
+a {
+  color: v.$main-color;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+  vertical-align: bottom;
+}
+
+.inner {
+  margin: 0 auto;
+  padding: 0 2%;
+  max-width: 1280px;
+}
+
+.wrapper {
+  margin: 120px 10%;
+
+  @include m.sp {
+    margin: 30px 4%;
+  }
+
+  @include m.tab {
+    margin: 60px 4%;
+  }
+}
+
+
+
+.flex-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include m.tab {
+    flex-direction: column;
+  }
+}
+
+.item {
+  width: 48%;
+
+  @include m.tab {
+    width: 100%;
+  }
+
+  img {
+    border-radius: 30px;
+    height: 380px;
+
+    @include m.tab {
+      height: 18rem;
+      width: 100%;
+    }
+  }
+
+  p {
+    padding: 10px 0 20px 0;
+  }
+}
+
+.center {
+  text-align: center;
+  letter-spacing: 0.18em;
+  line-height: 2rem;
+
+  @include m.sp {
+    text-align: left;
+    letter-spacing: 0em;
+    line-height: 1.6;
+  }
+}
+
+
+
+.sec-title {
+  font-size: 30px;
+  font-weight: bold;
+  position: relative;
+  margin-bottom: 30px;
+  display: table;
+  margin-inline: auto;
+
+  @include m.tab {
+    margin-top: 74px;
+  }
+
+  @include m.sp {
+    font-size: 21px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+
+  &:before {
+    content: "";
+    font-family: "Allura";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 300%;
+    color: v.$accent-color;
+    transform: rotate(-13deg);
+    letter-spacing: 12px;
+    position: absolute;
+    right: 60%;
+    top: -65px;
+    z-index: -1;
+    white-space: nowrap;
+  }
+}
+
+h5 {
+  font-size: 25px;
+  position: relative;
+  padding: 1.5rem 2.5rem;
+  border: 4px solid #000;
+
+  @include m.sp {
+    font-size: 21px;
+    margin: 0 4%;
+    padding: 1rem 2rem;
+  }
+
+  @include m.sp {
+    font-size: 21px;
+    margin: 0 4%;
+    padding: 1rem 2rem;
+  }
+
+  &:before {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    content: '';
+    border: 4px dotted #000;
+  }
+}
+
+.readmore {
+  text-align: right;
+}
+
+/*== 矢印の線がループして伸縮 */
+.btnlinestretches5 {
+  /*線の基点とするためrelativeを指定*/
+  position: relative;
+  /*リンクの形状*/
+  color: #333;
+  padding: 10px 0;
+  display: inline-block;
+  text-decoration: none;
+  outline: none;
+
+  @include m.sp {
+    left: 45px;
+  }
+
+  /*線の設定*/
+  &::before {
+    content: "";
+    /*絶対配置で線の位置を決める*/
+    position: absolute;
+    bottom: 0;
+    /*線の形状*/
+    width: 100%;
+    height: 1px;
+    background: v.$main-color;
+  }
+
+  /*矢印の設定*/
+  &::after {
+    content: "";
+    /*絶対配置で線の位置を決める*/
+    position: absolute;
+    bottom: -4px;
+    /*矢印の形状*/
+    width: 8px;
+    height: 8px;
+    border-top: 1px solid #333;
+    border-right: 1px solid #333;
+    transform: rotate(45deg);
+  }
+
+  /*線と矢印を繰り返しアニメーション*/
+  &::before {
+    animation: arrowlong01 2s ease infinite;
+  }
+
+  &::after {
+    animation: arrowlong02 2s ease infinite;
+  }
+}
+
+@keyframes arrowlong01 {
+  0% {
+    width: 0;
+    opacity: 0
+  }
+
+  20% {
+    width: 0;
+    opacity: 1
+  }
+
+  80% {
+    width: 105%;
+    opacity: 1
+  }
+
+  100% {
+    width: 105%;
+    opacity: 0
+  }
+}
+
+@keyframes arrowlong02 {
+  0% {
+    left: 0;
+    opacity: 0
+  }
+
+  20% {
+    left: 0;
+    opacity: 1
+  }
+
+  80% {
+    left: 103%;
+    opacity: 1
+  }
+
+  100% {
+    left: 103%;
+    opacity: 0
+  }
+}
